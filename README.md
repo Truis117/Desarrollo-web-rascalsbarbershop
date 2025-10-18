@@ -1,4 +1,4 @@
-# Clip & Fade — Barbería (sitio estático)
+# Clip & Fade — Barbería 
 
 ## Estructura del proyecto
 
