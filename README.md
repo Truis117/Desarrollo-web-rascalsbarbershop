@@ -1,12 +1,23 @@
-# Clip & Fade — Barbería 
+# Clip & Fade — Barbería
+
+Sitio web para barbería desarrollado con Express y EJS, con diseño responsive y accesible.
 
 ## Estructura del proyecto
 
-El sitio ahora está dividido en varias páginas:
-- `index.html` — Página principal con la sección hero
-- `services.html` — Listado de servicios (corte, recorte de barba, pack)
-- `gallery.html` — Galería de fotos de cortes recientes
-- `booking.html` — Formulario para pedir citas
-- `contact.html` — Información de contacto y ubicación
-- `styles.css` — Hoja de estilos compartida, mobile-first, con grid responsivo y estados de foco accesibles
-- `scripts.js` — Validación del lado del cliente y helper para el año en el pie de página
+```
+├── views/              # Plantillas EJS
+│   ├── partials/       # Header, footer, head compartidos
+│   └── *.ejs          # Vistas de páginas (index, services, gallery, booking, contact)
+├── styles.css         # Estilos mobile-first con CSS Grid
+├── scripts.js         # Validación de formularios
+├── server.js          # Servidor Express
+└── package.json       # Dependencias (express, ejs)
+```
+
+## Páginas disponibles
+
+- `/` — Página principal con hero
+- `/services` — Servicios y precios
+- `/gallery` — Galería de trabajos
+- `/booking` — Formulario de reservas
+- `/contact` — Ubicación y contacto
