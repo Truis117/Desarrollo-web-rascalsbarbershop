@@ -1,0 +1,34 @@
+<%- include('partials/head', { title: "Book an Appointment — Clip & Fade" }) %>
+    <%- include('partials/header') %>
+
+        <main id="main" class="site-main" role="main">
+            <section id="booking" class="booking" aria-labelledby="booking-heading">
+                <div class="container">
+                    <h3 id="booking-heading">Book an Appointment</h3>
+                    <form id="booking-form" action="#" method="post" novalidate>
+                        <fieldset>
+                            <legend>Choose a time</legend>
+                            <label for="name">Full name</label>
+                            <input id="name" name="name" type="text" required />
+
+                            <label for="phone">Phone</label>
+                            <input id="phone" name="phone" type="tel" inputmode="tel" pattern="[0-9\-\s()+]+" />
+
+                            <label for="service">Service</label>
+                            <select id="service" name="service">
+                                <option value="haircut">Haircut</option>
+                                <option value="beard">Beard Trim</option>
+                                <option value="bundle">Bundle</option>
+                            </select>
+
+                            <label for="date">Preferred date & time</label>
+                            <input id="date" name="date" type="datetime-local" />
+
+                            <button type="submit" class="btn primary">Request booking</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <%- include('partials/footer') %>
