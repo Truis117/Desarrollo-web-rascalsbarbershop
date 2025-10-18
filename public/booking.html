@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Book an Appointment — Marco's Barbershop</title>
+    <meta name="description"
+        content="Marco's Barbershop — Classic cuts, modern styles. Book an appointment online or visit us in-store." />
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="branding">
+                <img src="logo.svg" alt="Clip & Fade logo" class="logo" />
+                <h1 class="site-title">Clip & Fade</h1>
+            </div>
+            <nav class="main-nav" role="navigation" aria-label="Primary">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a class="btn primary" href="booking.html">Book Now</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main" class="site-main" role="main">
+        <section id="booking" class="booking" aria-labelledby="booking-heading">
+            <div class="container">
+                <h3 id="booking-heading">Book an Appointment</h3>
+                <form id="booking-form" action="#" method="post" novalidate>
+                    <fieldset>
+                        <legend>Choose a time</legend>
+                        <label for="name">Full name</label>
+                        <input id="name" name="name" type="text" required />
+
+                        <label for="phone">Phone</label>
+                        <input id="phone" name="phone" type="tel" inputmode="tel" pattern="[0-9\-\s()+]+" />
+
+                        <label for="service">Service</label>
+                        <select id="service" name="service">
+                            <option value="haircut">Haircut</option>
+                            <option value="beard">Beard Trim</option>
+                            <option value="bundle">Bundle</option>
+                        </select>
+
+                        <label for="date">Preferred date & time</label>
+                        <input id="date" name="date" type="datetime-local" />
+
+                        <button type="submit" class="btn primary">Request booking</button>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; <span id="year">2025</span> Clip & Fade. All rights reserved.</p>
+            <nav aria-label="Footer">
+                <ul>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="../scripts.js" defer></script>
+</body>
+
+</html>

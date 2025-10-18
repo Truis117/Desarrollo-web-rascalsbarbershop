@@ -1,24 +1,22 @@
-# Clip & Fade — Barbershop (static site)
+# Clip & Fade — Barbería (sitio estático)
 
-Local preview:
+## Estructura del proyecto
 
-Open `index.html` in your browser. For a local server (recommended):
+El sitio ahora está dividido en varias páginas:
+- `index.html` — Página principal con la sección hero
+- `services.html` — Listado de servicios (corte, recorte de barba, pack)
+- `gallery.html` — Galería de fotos de cortes recientes
+- `booking.html` — Formulario para pedir citas
+- `contact.html` — Información de contacto y ubicación
+- `styles.css` — Hoja de estilos compartida, mobile-first, con grid responsivo y estados de foco accesibles
+- `scripts.js` — Validación del lado del cliente y helper para el año en el pie de página
 
-Python 3 built-in server:
+## Vista previa local:
+
+Abre `index.html` en tu navegador. Para usar un servidor local (recomendado):
+
+Servidor incorporado de Python 3:
 
 ```bash
 python3 -m http.server 8000
 ```
-
-Then open http://localhost:8000
-
-What I added:
-- `index.html` — semantic, accessible homepage markup (header, nav, main sections, form, footer).
-- `styles.css` — mobile-first stylesheet with responsive grid and accessible focus states.
-- `scripts.js` — small client-side validation and footer year helper.
-
-Next improvements:
-- Add real booking backend or integrate a scheduling service.
-- Replace placeholder images and `logo.svg` with real assets.
-- Add microdata or OpenGraph metadata for SEO and social sharing.
-- Improve accessibility with keyboard navigation testing and screen reader checks.
