@@ -5,11 +5,16 @@ Sitio web para barbería desarrollado con Express y EJS, con diseño responsive 
 ## Estructura del proyecto
 
 ```
+├── public/             # Archivos estáticos
+│   ├── css/
+│   │   └── styles.css  # Estilos mobile-first con CSS Grid
+│   ├── js/
+│   │   └── scripts.js  # Validación de formularios
+│   ├── images/         # Imágenes del sitio
+│   └── logo.svg        # Logo de la barbería
 ├── views/              # Plantillas EJS
 │   ├── partials/       # Header, footer, head compartidos
 │   └── *.ejs          # Vistas de páginas (index, services, gallery, booking, contact)
-├── styles.css         # Estilos mobile-first con CSS Grid
-├── scripts.js         # Validación de formularios
 ├── server.js          # Servidor Express
 └── package.json       # Dependencias (express, ejs)
 ```
