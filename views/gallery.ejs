@@ -1,0 +1,27 @@
+<%- include('partials/head', { title: "Gallery — Clip & Fade" }) %>
+    <%- include('partials/header') %>
+
+        <main id="main" class="site-main" role="main">
+            <section id="gallery" class="gallery" aria-labelledby="gallery-heading">
+                <div class="container">
+                    <h3 id="gallery-heading">Gallery</h3>
+                    <p class="muted">A few recent cuts from our team.</p>
+                    <div class="grid">
+                        <figure>
+                            <img src="/images/cut1.svg" alt="Short textured haircut" />
+                            <figcaption>Textured crop</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="/images/cut2.svg" alt="Classic taper haircut" />
+                            <figcaption>Classic taper</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="/images/trim1.svg" alt="Beard shaping and line up" />
+                            <figcaption>Beard shaping</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <%- include('partials/footer') %>
