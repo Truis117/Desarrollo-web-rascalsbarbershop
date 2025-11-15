@@ -369,6 +369,12 @@ select {
     transition: all 0.2s ease
 }
 
+select option {
+    background: var(--card);
+    color: var(--text);
+    padding: 0.5rem
+}
+
 input:focus,
 select:focus {
     outline: none;
