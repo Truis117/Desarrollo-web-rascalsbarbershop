@@ -4,6 +4,38 @@ document.addEventListener('DOMContentLoaded', function () {
     var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+    // Mobile menu toggle
+    var menuToggle = document.querySelector('.menu-toggle');
+    var mainNav = document.querySelector('.main-nav');
+    
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function () {
+            var isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        var navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
     var form = document.getElementById('booking-form');
     if (!form) return;
 
@@ -21,3 +53,4 @@ document.addEventListener('DOMContentLoaded', function () {
         form.reset();
     });
 });
+

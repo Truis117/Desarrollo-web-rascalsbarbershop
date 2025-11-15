@@ -7,18 +7,20 @@
                     <h3 id="booking-heading">Book an Appointment</h3>
                     <form id="booking-form" action="#" method="post" novalidate>
                         <fieldset>
-                            <legend>Choose a time</legend>
-                            <label for="name">Full name</label>
-                            <input id="name" name="name" type="text" required />
+                            <legend>Schedule your visit</legend>
+                            
+                            <label for="name">Full name *</label>
+                            <input id="name" name="name" type="text" placeholder="John Doe" required />
 
                             <label for="phone">Phone</label>
-                            <input id="phone" name="phone" type="tel" inputmode="tel" pattern="[0-9\-\s()+]+" />
+                            <input id="phone" name="phone" type="tel" inputmode="tel" pattern="[0-9\-\s()+]+" placeholder="+1 (555) 123-4567" />
 
-                            <label for="service">Service</label>
-                            <select id="service" name="service">
-                                <option value="haircut">Haircut</option>
-                                <option value="beard">Beard Trim</option>
-                                <option value="bundle">Bundle</option>
+                            <label for="service">Service *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service</option>
+                                <option value="haircut">Haircut — $25+</option>
+                                <option value="beard">Beard Trim — $15+</option>
+                                <option value="bundle">Bundle (Cut + Beard) — $35+</option>
                             </select>
 
                             <label for="date">Preferred date & time</label>
