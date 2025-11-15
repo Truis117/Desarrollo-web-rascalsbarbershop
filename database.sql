@@ -46,6 +46,44 @@ CREATE TABLE BARBERO (
 ) ENGINE=InnoDB COMMENT='Barberos del establecimiento';
 
 -- ============================================
+-- TABLA: USUARIO
+-- Sistema de autenticación unificado
+-- ============================================
+CREATE TABLE USUARIO (
+    id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL COMMENT 'Hash bcrypt de la contraseña',
+    rol ENUM('CLIENTE', 'BARBERO') NOT NULL,
+    id_cliente INT UNSIGNED NULL COMMENT 'Referencia a CLIENTE si rol es CLIENTE',
+    id_barbero INT UNSIGNED NULL COMMENT 'Referencia a BARBERO si rol es BARBERO',
+    fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    ultimo_login TIMESTAMP NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    
+    -- Foreign Keys
+    CONSTRAINT fk_usuario_cliente 
+        FOREIGN KEY (id_cliente) REFERENCES CLIENTE(id_cliente) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+    
+    CONSTRAINT fk_usuario_barbero 
+        FOREIGN KEY (id_barbero) REFERENCES BARBERO(id_barbero) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+    
+    -- Validación: debe tener id_cliente O id_barbero según el rol
+    CONSTRAINT chk_usuario_rol_referencia 
+        CHECK (
+            (rol = 'CLIENTE' AND id_cliente IS NOT NULL AND id_barbero IS NULL) OR
+            (rol = 'BARBERO' AND id_barbero IS NOT NULL AND id_cliente IS NULL)
+        ),
+    
+    INDEX idx_email (email),
+    INDEX idx_rol (rol),
+    INDEX idx_activo (activo)
+) ENGINE=InnoDB COMMENT='Usuarios del sistema con autenticación';
+
+-- ============================================
 -- TABLA: SERVICIO
 -- Catálogo de servicios ofrecidos
 -- ============================================
@@ -182,6 +220,22 @@ INSERT INTO BARBERO (nombre, apellido, especialidad, correo, telefono, disponibi
 ('Carlos', 'Ramírez', 'Cortes clásicos', 'carlos@barbershop.com', '555-0101', 'Disponible'),
 ('Miguel', 'Torres', 'Diseño y fade', 'miguel@barbershop.com', '555-0102', 'Disponible'),
 ('Juan', 'Pérez', 'Barba y afeitado', 'juan@barbershop.com', '555-0103', 'Disponible');
+
+-- Insertar clientes de ejemplo
+INSERT INTO CLIENTE (nombre, apellido, correo, telefono, contraseña, direccion) VALUES
+('Ana', 'García', 'ana@example.com', '555-0201', '$2b$10$examplehash1', 'Calle 123'),
+('Luis', 'Martínez', 'luis@example.com', '555-0202', '$2b$10$examplehash2', 'Avenida 456');
+
+-- Insertar usuarios de ejemplo (contraseña ejemplo: 'password123')
+-- NOTA: En producción usar bcrypt real, estos son hashes de ejemplo
+INSERT INTO USUARIO (email, password_hash, rol, id_cliente, id_barbero) VALUES
+-- Clientes
+('ana@example.com', '$2b$10$examplehash1', 'CLIENTE', 1, NULL),
+('luis@example.com', '$2b$10$examplehash2', 'CLIENTE', 2, NULL),
+-- Barberos
+('carlos@barbershop.com', '$2b$10$examplehash3', 'BARBERO', NULL, 1),
+('miguel@barbershop.com', '$2b$10$examplehash4', 'BARBERO', NULL, 2),
+('juan@barbershop.com', '$2b$10$examplehash5', 'BARBERO', NULL, 3);
 
 -- ============================================
 -- VISTAS ÚTILES (OPCIONAL)
