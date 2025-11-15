@@ -15,22 +15,65 @@
                             <label for="phone">Phone</label>
                             <input id="phone" name="phone" type="tel" inputmode="tel" pattern="[0-9\-\s()+]+" placeholder="+1 (555) 123-4567" />
 
-                            <label for="service">Service *</label>
-                            <select id="service" name="service" required>
-                                <option value="">Select a service</option>
-                                <option value="haircut">Haircut — $25+</option>
-                                <option value="beard">Beard Trim — $15+</option>
-                                <option value="bundle">Bundle (Cut + Beard) — $35+</option>
+                            <label for="barbero">Barber *</label>
+                            <select id="barbero" name="barbero" required>
+                                <option value="">Loading barbers...</option>
                             </select>
 
-                            <label for="date">Preferred date & time</label>
-                            <input id="date" name="date" type="datetime-local" />
+                            <label for="service">Service *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Loading services...</option>
+                            </select>
+
+                            <label for="date">Preferred date & time *</label>
+                            <input id="date" name="date" type="datetime-local" required />
 
                             <button type="submit" class="btn primary">Request booking</button>
                         </fieldset>
                     </form>
                 </div>
             </section>
+
+            <script>
+                // Cargar barberos y servicios al cargar la página
+                document.addEventListener('DOMContentLoaded', async function() {
+                    try {
+                        // Cargar barberos
+                        const barberosResponse = await fetch('/api/barberos');
+                        const barberos = await barberosResponse.json();
+                        const barberoSelect = document.getElementById('barbero');
+                        barberoSelect.innerHTML = '<option value="">Select a barber</option>';
+                        barberos.forEach(barbero => {
+                            const option = document.createElement('option');
+                            option.value = barbero.id_barbero;
+                            option.textContent = `${barbero.nombre} ${barbero.apellido} - ${barbero.especialidad || 'General'}`;
+                            barberoSelect.appendChild(option);
+                        });
+
+                        // Cargar servicios
+                        const serviciosResponse = await fetch('/api/servicios');
+                        const servicios = await serviciosResponse.json();
+                        const serviceSelect = document.getElementById('service');
+                        serviceSelect.innerHTML = '<option value="">Select a service</option>';
+                        servicios.forEach(servicio => {
+                            const option = document.createElement('option');
+                            option.value = servicio.id_servicio;
+                            option.textContent = `${servicio.nombre_servicio} — $${parseFloat(servicio.precio).toFixed(3)}`;
+                            serviceSelect.appendChild(option);
+                        });
+
+                        // Establecer fecha mínima (hoy)
+                        const dateInput = document.getElementById('date');
+                        const now = new Date();
+                        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                        dateInput.min = now.toISOString().slice(0, 16);
+
+                    } catch (error) {
+                        console.error('Error loading booking data:', error);
+                        alert('Error loading barbers and services. Please refresh the page.');
+                    }
+                });
+            </script>
         </main>
 
         <%- include('partials/footer') %>

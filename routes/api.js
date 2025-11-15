@@ -50,6 +50,12 @@ router.delete('/servicios/:id', servicioController.deleteServicio);
 // ============================================
 // RUTAS DE CITAS
 // ============================================
+// Ruta de prueba
+router.get('/citas/test', (req, res) => {
+    res.json({ message: 'API de citas funcionando correctamente' });
+});
+
+router.post('/citas/booking', citaController.createBooking); // Endpoint especial para formulario web
 router.post('/citas', citaController.createCita);
 router.get('/citas', citaController.getAllCitas);
 router.get('/citas/:id', citaController.getCitaById);

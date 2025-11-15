@@ -80,3 +80,110 @@ exports.deleteCita = async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar la cita.', details: error.message });
     }
 };
+
+// Endpoint especial para booking desde el formulario web
+exports.createBooking = async (req, res) => {
+    console.log('📅 Booking request recibido:', req.body);
+    
+    try {
+        const { nombre_completo, telefono, id_barbero, id_servicio, fecha, hora } = req.body;
+
+        // Validar datos requeridos
+        if (!nombre_completo || !id_barbero || !id_servicio || !fecha || !hora) {
+            console.log('❌ Validación fallida - Datos faltantes');
+            return res.status(400).json({ 
+                error: 'Faltan datos requeridos.',
+                required: ['nombre_completo', 'id_barbero', 'id_servicio', 'fecha', 'hora']
+            });
+        }
+
+        // Separar nombre y apellido
+        const nombreParts = nombre_completo.trim().split(' ');
+        const nombre = nombreParts[0];
+        const apellido = nombreParts.slice(1).join(' ') || nombre;
+
+        // Generar email temporal si no existe
+        const emailTemp = `${nombre.toLowerCase()}.${apellido.toLowerCase()}@temp.booking`;
+        
+        // Buscar o crear cliente
+        let cliente = await Cliente.findOne({ 
+            where: { 
+                nombre: nombre,
+                apellido: apellido
+            } 
+        });
+
+        if (!cliente) {
+            // Crear nuevo cliente
+            cliente = await Cliente.create({
+                nombre: nombre,
+                apellido: apellido,
+                correo: emailTemp,
+                telefono: telefono || null,
+                contraseña: 'temporal123', // Contraseña temporal
+                direccion: null
+            });
+        } else {
+            // Actualizar teléfono si se proporcionó uno nuevo
+            if (telefono && telefono !== cliente.telefono) {
+                await cliente.update({ telefono: telefono });
+            }
+        }
+
+        // Verificar que el barbero existe
+        const barbero = await Barbero.findByPk(id_barbero);
+        if (!barbero) {
+            return res.status(404).json({ error: 'Barbero no encontrado.' });
+        }
+
+        // Verificar que el servicio existe
+        const servicio = await Servicio.findByPk(id_servicio);
+        if (!servicio) {
+            return res.status(404).json({ error: 'Servicio no encontrado.' });
+        }
+
+        // Verificar disponibilidad (no hay otra cita en la misma fecha/hora con el mismo barbero)
+        const citaExistente = await Cita.findOne({
+            where: {
+                id_barbero: id_barbero,
+                fecha: fecha,
+                hora: hora,
+                estado: ['Pendiente', 'Confirmada']
+            }
+        });
+
+        if (citaExistente) {
+            return res.status(409).json({ 
+                error: 'El barbero ya tiene una cita agendada en ese horario. Por favor seleccione otra hora.' 
+            });
+        }
+
+        // Crear la cita
+        const nuevaCita = await Cita.create({
+            id_cliente: cliente.id_cliente,
+            id_barbero: id_barbero,
+            id_servicio: id_servicio,
+            fecha: fecha,
+            hora: hora,
+            estado: 'Pendiente'
+        });
+
+        // Obtener cita completa con relaciones
+        const citaCompleta = await Cita.findByPk(nuevaCita.id_cita, {
+            include: [
+                { model: Cliente, as: 'Cliente', attributes: ['nombre', 'apellido', 'telefono'] },
+                { model: Barbero, as: 'Barbero', attributes: ['nombre', 'apellido', 'especialidad'] },
+                { model: Servicio, as: 'Servicio', attributes: ['nombre_servicio', 'precio', 'duracion'] }
+            ]
+        });
+
+        res.status(201).json({
+            message: 'Cita agendada exitosamente.',
+            cita: citaCompleta
+        });
+
+    } catch (error) {
+        console.error('Error en booking:', error);
+        res.status(500).json({ error: 'Error al agendar la cita.', details: error.message });
+    }
+};
