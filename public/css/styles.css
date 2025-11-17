@@ -204,6 +204,46 @@ body {
     box-shadow: 0 4px 12px rgba(227, 178, 60, 0.2)
 }
 
+.btn.gradient {
+    background: linear-gradient(90deg, #6d5df6, #8e5cf6);
+    color: #fff;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 1.05rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(36, 11, 255, 0.12);
+}
+
+.form-hero h1 {
+    font-size: 3.5rem;
+    margin: 0;
+}
+
+.form-hero .form-lead {
+    margin-top: .5rem;
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.auth-form {
+    max-width: 720px;
+    margin: 2rem auto 3rem;
+}
+
+.auth-form .row {
+    display: flex;
+    gap: 1rem;
+}
+
+.auth-form .col {
+    flex: 1
+}
+
+.center {
+    text-align: center
+}
+
+
 .btn.primary:hover,
 .btn.primary:focus {
     background: #d9a82e;
