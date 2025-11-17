@@ -1,0 +1,35 @@
+<header class="site-header" role="banner">
+    <div class="container">
+        <div class="branding">
+            <img src="/logo.svg" alt="Clip & Fade logo" class="logo" />
+            <h1 class="site-title">Clip & Fade</h1>
+        </div>
+
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="main-nav" role="navigation" aria-label="Primary">
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/services">Servicios</a></li>
+                <li><a href="/gallery">Galería</a></li>
+                <li><a href="/contact">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a class="btn primary" href="/booking">Reservar</a>
+            <% if (typeof session !=='undefined' && session.user) { %>
+                <span class="nav-user">Hola, <%= session.user.email %></span>
+                <form method="post" action="/logout" style="display:inline">
+                    <button class="btn" type="submit">Salir</button>
+                </form>
+                <% } else { %>
+                    <a class="btn" href="/login">Iniciar sesión</a>
+                    <a class="btn ghost" href="/register">Registro</a>
+                    <% } %>
+        </div>
+    </div>
+</header>
