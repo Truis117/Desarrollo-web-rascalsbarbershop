@@ -1,5 +1,4 @@
 const { Usuario, Cliente, Barbero } = require('../models');
-const bcrypt = require('bcryptjs');
 
 // Registro de Usuario
 exports.register = async (req, res) => {
@@ -16,20 +15,19 @@ exports.register = async (req, res) => {
 
         if (rol === 'CLIENTE') {
             // Crear Cliente primero
-            const hashed = await bcrypt.hash(password, 10);
             const nuevoCliente = await Cliente.create({
                 nombre,
                 apellido,
                 correo: email,
                 telefono,
-                contraseña: hashed,
+                contraseña: password, // En producción, hashear con bcrypt
                 direccion
             });
 
             // Crear Usuario vinculado al Cliente
             nuevoUsuario = await Usuario.create({
                 email,
-                password_hash: hashed,
+                password_hash: password, // En producción, hashear con bcrypt
                 rol: 'CLIENTE',
                 id_cliente: nuevoCliente.id_cliente,
                 id_barbero: null
@@ -37,7 +35,6 @@ exports.register = async (req, res) => {
 
         } else if (rol === 'BARBERO') {
             // Crear Barbero primero
-            const hashed = await bcrypt.hash(password, 10);
             const nuevoBarbero = await Barbero.create({
                 nombre,
                 apellido,
@@ -49,7 +46,7 @@ exports.register = async (req, res) => {
             // Crear Usuario vinculado al Barbero
             nuevoUsuario = await Usuario.create({
                 email,
-                password_hash: hashed,
+                password_hash: password, // En producción, hashear con bcrypt
                 rol: 'BARBERO',
                 id_cliente: null,
                 id_barbero: nuevoBarbero.id_barbero
@@ -91,9 +88,8 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: 'Credenciales inválidas.' });
         }
 
-        // Verificar contraseña
-        const match = await bcrypt.compare(password, usuario.password_hash);
-        if (!match) {
+        // Verificar contraseña (En producción, usar bcrypt.compare)
+        if (usuario.password_hash !== password) {
             return res.status(401).json({ error: 'Credenciales inválidas.' });
         }
 

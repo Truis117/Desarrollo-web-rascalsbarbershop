@@ -21,15 +21,6 @@
         </nav>
         <div class="header-actions">
             <a class="btn primary" href="/booking">Reservar</a>
-            <% if (typeof session !=='undefined' && session.user) { %>
-                <span class="nav-user">Hola, <%= session.user.email %></span>
-                <form method="post" action="/logout" style="display:inline">
-                    <button class="btn" type="submit">Salir</button>
-                </form>
-                <% } else { %>
-                    <a class="btn" href="/login">Iniciar sesión</a>
-                    <a class="btn ghost" href="/register">Registro</a>
-                    <% } %>
         </div>
     </div>
 </header>

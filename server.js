@@ -3,7 +3,6 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const session = require('express-session');
 
 // Importar configuración de base de datos y rutas API
 const { testConnection } = require('./config/database');
@@ -19,24 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Servir archivos estáticos desde public/
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Configurar sesiones (nota: para producción, usar store persistente)
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'dev-secret',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }
-}));
-
-// Hacer la sesión accesible en vistas
-app.use((req, res, next) => {
-    res.locals.session = req.session;
-    next();
-});
-
-// Rutas de autenticación web (montadas en raíz para usar /login y /register)
-const authWebRoutes = require('./routes/authWeb');
-app.use('/', authWebRoutes);
 
 // ============================================
 // RUTAS DE VISTAS (Páginas Web)
@@ -56,11 +37,6 @@ app.use('/api', apiRoutes);
 // MANEJO DE ERRORES 404
 // ============================================
 app.use((req, res) => {
-    // Si el cliente espera HTML, renderizar una página 404 bonita
-    const accept = req.headers.accept || '';
-    if (accept.includes('text/html')) {
-        return res.status(404).render('404');
-    }
     res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
