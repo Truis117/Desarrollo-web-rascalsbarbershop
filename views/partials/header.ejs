@@ -17,19 +17,19 @@
                 <li><a href="/services">Servicios</a></li>
                 <li><a href="/gallery">Galería</a></li>
                 <li><a href="/contact">Contacto</a></li>
+                <li><a href="/booking" class="btn-reservar">Reservar</a></li>
             </ul>
         </nav>
         <div class="header-actions">
-            <a class="btn primary" href="/booking">Reservar</a>
-            <% if (typeof session !=='undefined' && session.user) { %>
-                <span class="nav-user">Hola, <%= session.user.email %></span>
-                <form method="post" action="/logout" style="display:inline">
-                    <button class="btn" type="submit">Salir</button>
+            <% if (typeof session !== 'undefined' && session.user) { %>
+                <span class="user-email-compact"><%= session.user.email %></span>
+                <form method="post" action="/logout" style="display:inline; margin:0">
+                    <button class="btn-logout-compact" type="submit" title="Cerrar sesión">Salir</button>
                 </form>
-                <% } else { %>
-                    <a class="btn" href="/login">Iniciar sesión</a>
-                    <a class="btn ghost" href="/register">Registro</a>
-                    <% } %>
+            <% } else { %>
+                <a class="btn-compact" href="/login">Iniciar sesión</a>
+                <a class="btn-compact ghost" href="/register">Registro</a>
+            <% } %>
         </div>
     </div>
 </header>
