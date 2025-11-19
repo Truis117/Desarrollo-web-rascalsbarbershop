@@ -1,4 +1,4 @@
-const { Cliente, Cita, Carrito } = require('../models');
+const { Cliente, Cita } = require('../models');
 
 // C: Crear Cliente
 exports.createCliente = async (req, res) => {
@@ -20,11 +20,11 @@ exports.getAllClientes = async (req, res) => {
     }
 };
 
-// R: Obtener Cliente por ID (incluyendo Citas y Carritos)
+// R: Obtener Cliente por ID (incluyendo Citas)
 exports.getClienteById = async (req, res) => {
     try {
         const cliente = await Cliente.findByPk(req.params.id, {
-            include: [{ model: Cita, as: 'Citas' }, { model: Carrito, as: 'Carritos' }]
+            include: [{ model: Cita, as: 'Citas' }]
         });
         if (cliente) {
             res.status(200).json(cliente);

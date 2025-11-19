@@ -7,8 +7,6 @@ const barberoController = require('../controllers/barberoController');
 const usuarioController = require('../controllers/usuarioController');
 const servicioController = require('../controllers/servicioController');
 const citaController = require('../controllers/citaController');
-const carritoController = require('../controllers/carritoController');
-const detalleCarritoController = require('../controllers/detalleCarritoController');
 const pagoController = require('../controllers/pagoController');
 const panelController = require('../controllers/panelController');
 
@@ -62,23 +60,6 @@ router.get('/citas', citaController.getAllCitas);
 router.get('/citas/:id', citaController.getCitaById);
 router.put('/citas/:id', citaController.updateCita);
 router.delete('/citas/:id', citaController.deleteCita);
-
-// ============================================
-// RUTAS DE CARRITOS
-// ============================================
-router.post('/carritos', carritoController.createCarrito);
-router.get('/carritos', carritoController.getAllCarritos);
-router.get('/carritos/:id', carritoController.getCarritoById);
-router.put('/carritos/:id', carritoController.updateCarrito);
-router.delete('/carritos/:id', carritoController.deleteCarrito);
-
-// ============================================
-// RUTAS DE DETALLES DE CARRITO
-// ============================================
-router.post('/detalles-carrito', detalleCarritoController.createDetalleCarrito);
-router.get('/detalles-carrito', detalleCarritoController.getAllDetallesCarrito);
-router.put('/detalles-carrito/:id', detalleCarritoController.updateDetalleCarrito);
-router.delete('/detalles-carrito/:id', detalleCarritoController.deleteDetalleCarrito);
 
 // ============================================
 // RUTAS DE PAGOS

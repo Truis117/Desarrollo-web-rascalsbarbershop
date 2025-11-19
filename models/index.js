@@ -6,8 +6,6 @@ const Barbero = require('./Barbero');
 const Usuario = require('./Usuario');
 const Servicio = require('./Servicio');
 const Cita = require('./Cita');
-const Carrito = require('./Carrito');
-const DetalleCarrito = require('./DetalleCarrito');
 const Pago = require('./Pago');
 
 // ============================================
@@ -34,18 +32,6 @@ Cita.belongsTo(Barbero, { foreignKey: 'id_barbero', as: 'Barbero' });
 Servicio.hasMany(Cita, { foreignKey: 'id_servicio', as: 'Citas' });
 Cita.belongsTo(Servicio, { foreignKey: 'id_servicio', as: 'Servicio' });
 
-// Cliente -> Carritos (uno a muchos)
-Cliente.hasMany(Carrito, { foreignKey: 'id_cliente', as: 'Carritos' });
-Carrito.belongsTo(Cliente, { foreignKey: 'id_cliente', as: 'Cliente' });
-
-// Carrito -> DetalleCarrito (uno a muchos)
-Carrito.hasMany(DetalleCarrito, { foreignKey: 'id_carrito', as: 'Detalles' });
-DetalleCarrito.belongsTo(Carrito, { foreignKey: 'id_carrito', as: 'Carrito' });
-
-// Servicio -> DetalleCarrito (uno a muchos)
-Servicio.hasMany(DetalleCarrito, { foreignKey: 'id_servicio', as: 'DetallesCarrito' });
-DetalleCarrito.belongsTo(Servicio, { foreignKey: 'id_servicio', as: 'Servicio' });
-
 // Cita -> Pago (uno a uno)
 Cita.hasOne(Pago, { foreignKey: 'id_cita', as: 'Pago' });
 Pago.belongsTo(Cita, { foreignKey: 'id_cita', as: 'Cita' });
@@ -58,7 +44,5 @@ module.exports = {
     Usuario,
     Servicio,
     Cita,
-    Carrito,
-    DetalleCarrito,
     Pago
 };
