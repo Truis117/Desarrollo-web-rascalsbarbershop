@@ -1,0 +1,78 @@
+const { Carrito, Cliente, DetalleCarrito } = require('../models');
+
+// C: Crear Carrito
+exports.createCarrito = async (req, res) => {
+    try {
+        const nuevoCarrito = await Carrito.create(req.body);
+        res.status(201).json(nuevoCarrito);
+    } catch (error) {
+        res.status(400).json({ error: 'Error al crear el carrito.', details: error.message });
+    }
+};
+
+// R: Obtener Todos los Carritos (incluyendo Cliente y sus Detalles)
+exports.getAllCarritos = async (req, res) => {
+    try {
+        const carritos = await Carrito.findAll({
+            include: [
+                { model: Cliente, as: 'Cliente', attributes: ['nombre', 'apellido'] },
+                { model: DetalleCarrito, as: 'Detalles' }
+            ]
+        });
+        res.status(200).json(carritos);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener los carritos.', details: error.message });
+    }
+};
+
+// R: Obtener Carrito por ID (incluyendo relaciones)
+exports.getCarritoById = async (req, res) => {
+    try {
+        const carrito = await Carrito.findByPk(req.params.id, {
+            include: [
+                { model: Cliente, as: 'Cliente' },
+                { model: DetalleCarrito, as: 'Detalles' }
+            ]
+        });
+        if (carrito) {
+            res.status(200).json(carrito);
+        } else {
+            res.status(404).json({ error: 'Carrito no encontrado.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener el carrito.', details: error.message });
+    }
+};
+
+// U: Actualizar Carrito
+exports.updateCarrito = async (req, res) => {
+    try {
+        const [updatedRows] = await Carrito.update(req.body, {
+            where: { id_carrito: req.params.id }
+        });
+        if (updatedRows) {
+            const carritoActualizado = await Carrito.findByPk(req.params.id);
+            res.status(200).json(carritoActualizado);
+        } else {
+            res.status(404).json({ error: 'Carrito no encontrado o sin cambios.' });
+        }
+    } catch (error) {
+        res.status(400).json({ error: 'Error al actualizar el carrito.', details: error.message });
+    }
+};
+
+// D: Eliminar Carrito
+exports.deleteCarrito = async (req, res) => {
+    try {
+        const deletedRows = await Carrito.destroy({
+            where: { id_carrito: req.params.id }
+        });
+        if (deletedRows) {
+            res.status(204).send();
+        } else {
+            res.status(404).json({ error: 'Carrito no encontrado.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar el carrito.', details: error.message });
+    }
+};

@@ -1,0 +1,56 @@
+<header class="site-header" role="banner">
+    <div class="container">
+        <div class="branding">
+            <img src="/logo.svg" alt="Clip & Fade logo" class="logo" />
+            <h1 class="site-title">Clip & Fade</h1>
+        </div>
+
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="main-nav" role="navigation" aria-label="Primary">
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/services">Servicios</a></li>
+                <li><a href="/gallery">Galería</a></li>
+                <li><a href="/contact">Contacto</a></li>
+                <!-- AGREGADO: Enlace al Panel -->
+                <li><a href="/admin" class="btn-panel">Panel</a></li>
+                <li><a href="/booking" class="btn-reservar">Reservar</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <% if (typeof session !== 'undefined' && session.user) { %>
+                <span class="user-email-compact"><%= session.user.email %></span>
+                <form method="post" action="/logout" style="display:inline; margin:0">
+                    <button class="btn-logout-compact" type="submit" title="Cerrar sesión">Salir</button>
+                </form>
+            <% } else { %>
+                <a class="btn-compact" href="/login">Iniciar sesión</a>
+                <a class="btn-compact ghost" href="/register">Registro</a>
+            <% } %>
+        </div>
+    </div>
+</header>
+
+<style>
+    /* Estilo para el botón del Panel */
+    .btn-panel {
+        background: #111212;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 5px;
+        transition: background 0.3s ease;
+    }
+
+    .btn-panel:hover {
+        background: #34495e;
+        color: white;
+    }
+</style>
