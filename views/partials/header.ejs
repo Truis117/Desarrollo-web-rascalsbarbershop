@@ -20,9 +20,27 @@
                 <!-- AGREGADO: Enlace al Panel -->
                 <li><a href="/admin" class="btn-panel">Panel</a></li>
                 <li><a href="/booking" class="btn-reservar">Reservar</a></li>
+                
+                <!-- Auth buttons mobile - only visible in mobile menu -->
+                <li class="mobile-auth-divider"></li>
+                <% if (typeof session !== 'undefined' && session.user) { %>
+                    <li class="mobile-only">
+                        <span class="mobile-user-email"><%= session.user.email %></span>
+                    </li>
+                    <li class="mobile-only">
+                        <form method="post" action="/logout" style="margin:0">
+                            <button class="mobile-btn-logout" type="submit">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                <% } else { %>
+                    <li class="mobile-only"><a href="/login" class="mobile-auth-link">Iniciar sesión</a></li>
+                    <li class="mobile-only"><a href="/register" class="mobile-auth-link">Registro</a></li>
+                <% } %>
             </ul>
         </nav>
-        <div class="header-actions">
+        
+        <!-- Desktop auth buttons -->
+        <div class="header-actions desktop-only">
             <% if (typeof session !== 'undefined' && session.user) { %>
                 <span class="user-email-compact"><%= session.user.email %></span>
                 <form method="post" action="/logout" style="display:inline; margin:0">
