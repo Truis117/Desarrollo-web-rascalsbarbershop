@@ -1,5 +1,5 @@
 const usuarioController = require('./usuarioController');
-const { Usuario } = require('../models');
+const { Usuario, Barbero, Cliente } = require('../models');
 const bcrypt = require('bcryptjs');
 const inMemoryAuth = require('../utils/inMemoryAuth');
 
@@ -12,6 +12,28 @@ exports.showLogin = (req, res) => {
 exports.postLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        // Buscar primero en la tabla BARBERO
+        const barbero = await Barbero.findOne({ where: { correo: email } });
+        
+        if (barbero) {
+            // El usuario es un barbero
+            const match = await bcrypt.compare(password, barbero.contraseña);
+            if (!match) return res.render('login', { error: 'Credenciales inválidas' });
+
+            // Guardar sesión como barbero
+            req.session.user = {
+                id_barbero: barbero.id_barbero,
+                email: barbero.correo,
+                rol: 'BARBERO',
+                nombre: barbero.nombre
+            };
+
+            // Redirigir al panel de administración
+            return res.redirect('/admin');
+        }
+
+        // Si no es barbero, buscar en la tabla USUARIO (clientes)
         const usuario = await Usuario.findOne({ where: { email, activo: true } });
         if (!usuario) return res.render('login', { error: 'Credenciales inválidas' });
 

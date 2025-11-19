@@ -28,6 +28,10 @@ const Barbero = sequelize.define('BARBERO', {
         type: DataTypes.STRING(20),
         allowNull: true
     },
+    contraseña: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
     disponibilidad: {
         type: DataTypes.STRING(50),
         defaultValue: 'Disponible'

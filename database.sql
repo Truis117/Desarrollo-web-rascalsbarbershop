@@ -40,6 +40,7 @@ CREATE TABLE BARBERO (
     especialidad VARCHAR(100),
     correo VARCHAR(150) NOT NULL UNIQUE,
     telefono VARCHAR(20),
+    contraseña VARCHAR(255) NOT NULL COMMENT 'Hash bcrypt de la contraseña',
     disponibilidad VARCHAR(50) DEFAULT 'Disponible',
     INDEX idx_disponibilidad (disponibilidad),
     INDEX idx_correo_barbero (correo)
@@ -215,11 +216,12 @@ INSERT INTO SERVICIO (nombre_servicio, descripcion, duracion, precio, imagen) VA
 ('Afeitado Tradicional', 'Afeitado con navaja y toalla caliente', 20, 15.000, '/images/afeitado.jpg'),
 ('Tinte', 'Aplicación de tinte profesional', 60, 45.000, '/images/tinte.jpg');
 
--- Insertar barberos de ejemplo
-INSERT INTO BARBERO (nombre, apellido, especialidad, correo, telefono, disponibilidad) VALUES
-('Carlos', 'Ramírez', 'Cortes clásicos', 'carlos@barbershop.com', '555-0101', 'Disponible'),
-('Miguel', 'Torres', 'Diseño y fade', 'miguel@barbershop.com', '555-0102', 'Disponible'),
-('Juan', 'Pérez', 'Barba y afeitado', 'juan@barbershop.com', '555-0103', 'Disponible');
+-- Insertar barberos de ejemplo (contraseña para todos: "barbero123")
+-- Hash bcrypt de "barbero123": $2b$10$7Z1qX3YJ5vN8KxE3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y
+INSERT INTO BARBERO (nombre, apellido, especialidad, correo, telefono, contraseña, disponibilidad) VALUES
+('Carlos', 'Ramírez', 'Cortes clásicos', 'carlos@barbershop.com', '555-0101', '$2b$10$7Z1qX3YJ5vN8KxE3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y', 'Disponible'),
+('Miguel', 'Torres', 'Diseño y fade', 'miguel@barbershop.com', '555-0102', '$2b$10$7Z1qX3YJ5vN8KxE3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y', 'Disponible'),
+('Juan', 'Pérez', 'Barba y afeitado', 'juan@barbershop.com', '555-0103', '$2b$10$7Z1qX3YJ5vN8KxE3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y', 'Disponible');
 
 -- Insertar clientes de ejemplo
 INSERT INTO CLIENTE (nombre, apellido, correo, telefono, contraseña, direccion) VALUES

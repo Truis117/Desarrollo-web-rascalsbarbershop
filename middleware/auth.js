@@ -45,8 +45,34 @@ const requireCliente = (req, res, next) => {
     }
 };
 
+// ============================================
+// MIDDLEWARE PARA RUTAS WEB (basado en sesión)
+// ============================================
+
+// Verificar que el usuario está autenticado (para vistas web)
+const requireAuth = (req, res, next) => {
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
+
+// Verificar que el usuario es BARBERO (para panel de administración)
+const requireBarberoWeb = (req, res, next) => {
+    if (req.session && req.session.user && req.session.user.rol === 'BARBERO') {
+        next();
+    } else {
+        res.status(403).render('404', { 
+            message: 'Acceso denegado. Solo barberos pueden acceder a esta sección.' 
+        });
+    }
+};
+
 module.exports = {
     authMiddleware,
     requireBarbero,
-    requireCliente
+    requireCliente,
+    requireAuth,
+    requireBarberoWeb
 };

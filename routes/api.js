@@ -10,6 +10,7 @@ const citaController = require('../controllers/citaController');
 const carritoController = require('../controllers/carritoController');
 const detalleCarritoController = require('../controllers/detalleCarritoController');
 const pagoController = require('../controllers/pagoController');
+const panelController = require('../controllers/panelController');
 
 // ============================================
 // RUTAS DE AUTENTICACIÓN
@@ -87,5 +88,13 @@ router.get('/pagos', pagoController.getAllPagos);
 router.get('/pagos/:id', pagoController.getPagoById);
 router.put('/pagos/:id', pagoController.updatePago);
 router.delete('/pagos/:id', pagoController.deletePago);
+
+// ============================================
+// RUTAS DEL PANEL DE ADMINISTRACIÓN
+// ============================================
+router.get('/panel/statistics', panelController.getStatistics);
+router.get('/panel/citas', panelController.getAllCitas);
+router.get('/panel/citas/filter', panelController.getCitasByDate);
+router.patch('/panel/citas/:id/status', panelController.updateCitaStatus);
 
 module.exports = router;

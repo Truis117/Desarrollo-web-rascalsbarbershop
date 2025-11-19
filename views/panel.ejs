@@ -11,25 +11,25 @@
                     <div class="contact-grid">
                         <div class="contact-card">
                             <h4>📅 Today's Appointments</h4>
-                            <p class="stat-number">5</p>
+                            <p class="stat-number" id="today-count">-</p>
                             <p class="muted">Scheduled</p>
                         </div>
 
                         <div class="contact-card">
                             <h4>📊 Weekly Total</h4>
-                            <p class="stat-number">12</p>
+                            <p class="stat-number" id="weekly-count">-</p>
                             <p class="muted">Appointments</p>
                         </div>
 
                         <div class="contact-card">
                             <h4>⏰ Pending</h4>
-                            <p class="stat-number">3</p>
+                            <p class="stat-number" id="pending-count">-</p>
                             <p class="muted">Confirmation</p>
                         </div>
 
                         <div class="contact-card">
                             <h4>💰 Revenue</h4>
-                            <p class="stat-number">$1,250</p>
+                            <p class="stat-number" id="revenue-amount">-</p>
                             <p class="muted">Today's income</p>
                         </div>
                     </div>
@@ -43,6 +43,7 @@
                                 <thead>
                                     <tr style="background: #34495e;">
                                         <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">👤 Client</th>
+                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">💈 Barber</th>
                                         <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">📅 Date</th>
                                         <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">🕒 Time</th>
                                         <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">✂️ Service</th>
@@ -50,64 +51,14 @@
                                         <th style="padding: 15px; text-align: center; border: 1px solid #4a6572; font-weight: 600;">⚡ Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr style="border-bottom: 1px solid #4a6572;">
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">Juan Pérez</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">15/03/2024</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">10:00 AM</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">Haircut</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e; text-align: center;">
-                                            <span id="status-1" style="background: #e74c3c; color: white; padding: 6px 10px; border-radius: 3px; font-size: 0.8em; display: inline-block; min-width: 80px;">Pending</span>
-                                        </td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e; text-align: center;">
-                                            <button onclick="confirmAppointment(1)" style="background: #27ae60; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Confirm</button>
-                                            <button onclick="cancelAppointment(1)" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
-                                        </td>
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #4a6572;">
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #2c3e50;">María García</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #2c3e50;">15/03/2024</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #2c3e50;">11:30 AM</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #2c3e50;">Shave</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #2c3e50; text-align: center;">
-                                            <span id="status-2" style="background: #3498db; color: white; padding: 6px 10px; border-radius: 3px; font-size: 0.8em; display: inline-block; min-width: 80px;">Confirmed</span>
-                                        </td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #2c3e50; text-align: center;">
-                                            <button onclick="completeAppointment(2)" style="background: #f39c12; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Complete</button>
-                                            <button onclick="cancelAppointment(2)" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
-                                        </td>
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #4a6572;">
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">Carlos López</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">16/03/2024</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">09:00 AM</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e;">Haircut & Beard</td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e; text-align: center;">
-                                            <span id="status-3" style="background: #e74c3c; color: white; padding: 6px 10px; border-radius: 3px; font-size: 0.8em; display: inline-block; min-width: 80px;">Pending</span>
-                                        </td>
-                                        <td style="padding: 15px; border: 1px solid #4a6572; background: #34495e; text-align: center;">
-                                            <button onclick="confirmAppointment(3)" style="background: #27ae60; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Confirm</button>
-                                            <button onclick="cancelAppointment(3)" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
+                                <tbody id="citas-table-body">
+                                    <tr>
+                                        <td colspan="7" style="padding: 30px; text-align: center; color: #95a5a6;">
+                                            Loading appointments...
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-
-                    <!-- Management Tools -->
-                    <div style="text-align: center; margin-top: 3rem;">
-                        <h4 style="margin-bottom: 1rem; color: #2c3e50;">🛠️ Management Tools</h4>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; max-width: 700px; margin: 0 auto;">
-                            <button style="background: #495057; color: white; border: none; padding: 15px 20px; border-radius: 5px; cursor: not-allowed; font-size: 0.9em; opacity: 0.7;">
-                                ➕ New Appointment
-                            </button>
-                            <button style="background: #495057; color: white; border: none; padding: 15px 20px; border-radius: 5px; cursor: not-allowed; font-size: 0.9em; opacity: 0.7;">
-                                👥 Client Management
-                            </button>
-                            <button style="background: #495057; color: white; border: none; padding: 15px 20px; border-radius: 5px; cursor: not-allowed; font-size: 0.9em; opacity: 0.7;">
-                                📊 View Reports
-                            </button>
                         </div>
                     </div>
 
@@ -124,27 +75,230 @@
         <%- include('partials/footer') %>
 
         <script>
-            // Funciones básicas para los botones de la tabla
-            function confirmAppointment(rowId) {
-                const statusElement = document.getElementById('status-' + rowId);
-                statusElement.textContent = 'Confirmed';
-                statusElement.style.background = '#3498db';
-                alert('✅ Appointment ' + rowId + ' confirmed successfully!');
-            }
+            // ============================================
+            // PANEL DE ADMINISTRACIÓN - SCRIPT DINÁMICO
+            // ============================================
 
-            function completeAppointment(rowId) {
-                const statusElement = document.getElementById('status-' + rowId);
-                statusElement.textContent = 'Completed';
-                statusElement.style.background = '#27ae60';
-                alert('✓ Appointment ' + rowId + ' marked as completed!');
-            }
+            // Estado de colores por tipo de estado
+            const statusColors = {
+                'Pendiente': '#e74c3c',
+                'Confirmada': '#3498db',
+                'Completada': '#27ae60',
+                'Cancelada': '#95a5a6'
+            };
 
-            function cancelAppointment(rowId) {
-                if (confirm('Are you sure you want to cancel appointment ' + rowId + '?')) {
-                    const statusElement = document.getElementById('status-' + rowId);
-                    statusElement.textContent = 'Cancelled';
-                    statusElement.style.background = '#95a5a6';
-                    alert('❌ Appointment ' + rowId + ' cancelled!');
+            // ============================================
+            // CARGAR ESTADÍSTICAS
+            // ============================================
+            async function loadStatistics() {
+                try {
+                    const response = await fetch('/api/panel/statistics');
+                    const data = await response.json();
+
+                    document.getElementById('today-count').textContent = data.todayCitas || 0;
+                    document.getElementById('weekly-count').textContent = data.weeklyCitas || 0;
+                    document.getElementById('pending-count').textContent = data.pendingCitas || 0;
+                    document.getElementById('revenue-amount').textContent = `$${parseFloat(data.revenue).toLocaleString()}`;
+                } catch (error) {
+                    console.error('Error loading statistics:', error);
                 }
             }
+
+            // ============================================
+            // CARGAR TODAS LAS CITAS
+            // ============================================
+            async function loadCitas() {
+                try {
+                    const response = await fetch('/api/panel/citas');
+                    const citas = await response.json();
+
+                    const tbody = document.getElementById('citas-table-body');
+                    
+                    if (!citas || citas.length === 0) {
+                        tbody.innerHTML = `
+                            <tr>
+                                <td colspan="7" style="padding: 30px; text-align: center; color: #95a5a6;">
+                                    No appointments found
+                                </td>
+                            </tr>
+                        `;
+                        return;
+                    }
+
+                    tbody.innerHTML = citas.map((cita, index) => {
+                        const clienteName = `${cita.Cliente?.nombre || 'N/A'} ${cita.Cliente?.apellido || ''}`.trim();
+                        const barberoName = `${cita.Barbero?.nombre || 'N/A'} ${cita.Barbero?.apellido || ''}`.trim();
+                        const serviceName = cita.Servicio?.nombre_servicio || 'N/A';
+                        const fecha = new Date(cita.fecha).toLocaleDateString('es-CO');
+                        const hora = cita.hora;
+                        const estado = cita.estado;
+                        const statusColor = statusColors[estado] || '#95a5a6';
+                        const bgColor = index % 2 === 0 ? '#34495e' : '#2c3e50';
+
+                        // Botones según el estado
+                        let actionButtons = '';
+                        if (estado === 'Pendiente') {
+                            actionButtons = `
+                                <button onclick="updateStatus(${cita.id_cita}, 'Confirmada')" style="background: #27ae60; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Confirm</button>
+                                <button onclick="updateStatus(${cita.id_cita}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
+                            `;
+                        } else if (estado === 'Confirmada') {
+                            actionButtons = `
+                                <button onclick="updateStatus(${cita.id_cita}, 'Completada')" style="background: #f39c12; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Complete</button>
+                                <button onclick="updateStatus(${cita.id_cita}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
+                            `;
+                        } else {
+                            actionButtons = `<span style="color: #95a5a6; font-size: 0.8em;">No actions</span>`;
+                        }
+
+                        return `
+                            <tr style="border-bottom: 1px solid #4a6572;" id="row-${cita.id_cita}">
+                                <td style="padding: 15px; border: 1px solid #4a6572; background: ${bgColor};">${clienteName}</td>
+                                <td style="padding: 15px; border: 1px solid #4a6572; background: ${bgColor};">${barberoName}</td>
+                                <td style="padding: 15px; border: 1px solid #4a6572; background: ${bgColor};">${fecha}</td>
+                                <td style="padding: 15px; border: 1px solid #4a6572; background: ${bgColor};">${hora}</td>
+                                <td style="padding: 15px; border: 1px solid #4a6572; background: ${bgColor};">${serviceName}</td>
+                                <td style="padding: 15px; border: 1px solid #4a6572; background: ${bgColor}; text-align: center;">
+                                    <span id="status-${cita.id_cita}" style="background: ${statusColor}; color: white; padding: 6px 10px; border-radius: 3px; font-size: 0.8em; display: inline-block; min-width: 80px;">${estado}</span>
+                                </td>
+                                <td style="padding: 15px; border: 1px solid #4a6572; background: ${bgColor}; text-align: center;" id="actions-${cita.id_cita}">
+                                    ${actionButtons}
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+
+                } catch (error) {
+                    console.error('Error loading appointments:', error);
+                    document.getElementById('citas-table-body').innerHTML = `
+                        <tr>
+                            <td colspan="7" style="padding: 30px; text-align: center; color: #e74c3c;">
+                                Error loading appointments. Please refresh the page.
+                            </td>
+                        </tr>
+                    `;
+                }
+            }
+
+            // ============================================
+            // ACTUALIZAR ESTADO DE CITA
+            // ============================================
+            async function updateStatus(citaId, newStatus) {
+                const confirmMessage = {
+                    'Confirmada': '¿Confirmar esta cita?',
+                    'Completada': '¿Marcar esta cita como completada?',
+                    'Cancelada': '¿Está seguro de cancelar esta cita?'
+                };
+
+                if (!confirm(confirmMessage[newStatus])) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/api/panel/citas/${citaId}/status`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ estado: newStatus })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Error updating status');
+                    }
+
+                    const result = await response.json();
+
+                    // Actualizar el badge de estado
+                    const statusElement = document.getElementById(`status-${citaId}`);
+                    statusElement.textContent = newStatus;
+                    statusElement.style.background = statusColors[newStatus];
+
+                    // Actualizar los botones de acción
+                    const actionsElement = document.getElementById(`actions-${citaId}`);
+                    if (newStatus === 'Confirmada') {
+                        actionsElement.innerHTML = `
+                            <button onclick="updateStatus(${citaId}, 'Completada')" style="background: #f39c12; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Complete</button>
+                            <button onclick="updateStatus(${citaId}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
+                        `;
+                    } else {
+                        actionsElement.innerHTML = `<span style="color: #95a5a6; font-size: 0.8em;">No actions</span>`;
+                    }
+
+                    // Recargar estadísticas
+                    loadStatistics();
+
+                    // Notificación de éxito
+                    showNotification(`✅ Cita actualizada a: ${newStatus}`, 'success');
+
+                } catch (error) {
+                    console.error('Error updating status:', error);
+                    showNotification('❌ Error al actualizar la cita', 'error');
+                }
+            }
+
+            // ============================================
+            // MOSTRAR NOTIFICACIONES
+            // ============================================
+            function showNotification(message, type) {
+                const color = type === 'success' ? '#27ae60' : '#e74c3c';
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${color};
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 5px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    z-index: 9999;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+
+            // ============================================
+            // INICIALIZAR AL CARGAR LA PÁGINA
+            // ============================================
+            document.addEventListener('DOMContentLoaded', () => {
+                loadStatistics();
+                loadCitas();
+
+                // Recargar cada 30 segundos
+                setInterval(() => {
+                    loadStatistics();
+                    loadCitas();
+                }, 30000);
+            });
         </script>
+
+        <style>
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        </style>

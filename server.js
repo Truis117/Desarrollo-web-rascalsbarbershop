@@ -9,6 +9,7 @@ const session = require('express-session');
 const { testConnection } = require('./config/database');
 const apiRoutes = require('./routes/api');
 const authWebRoutes = require('./routes/authWeb');
+const { requireBarberoWeb } = require('./middleware/auth');
 
 // Configuración de EJS
 app.set('view engine', 'ejs');
@@ -46,7 +47,7 @@ app.get('/services', (req, res) => res.render('services'));
 app.get('/gallery', (req, res) => res.render('gallery'));
 app.get('/booking', (req, res) => res.render('booking'));
 app.get('/contact', (req, res) => res.render('contact'));
-app.get('/admin', (req, res) => res.render('panel'));
+app.get('/admin', requireBarberoWeb, (req, res) => res.render('panel'));
 
 // ============================================
 // RUTAS DE API REST
