@@ -15,6 +15,21 @@ const Servicio = sequelize.define('SERVICIO', {
         type: DataTypes.TEXT,
         allowNull: true
     },
+    descripcion_larga: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        comment: 'Descripción detallada del servicio'
+    },
+    beneficios: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        comment: 'Beneficios del servicio separados por comas'
+    },
+    incluye: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        comment: 'Qué incluye el servicio separado por comas'
+    },
     duracion: {
         type: DataTypes.INTEGER,
         allowNull: false,

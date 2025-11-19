@@ -92,6 +92,9 @@ CREATE TABLE SERVICIO (
     id_servicio INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre_servicio VARCHAR(150) NOT NULL,
     descripcion TEXT,
+    descripcion_larga TEXT COMMENT 'Descripción detallada del servicio',
+    beneficios TEXT COMMENT 'Beneficios del servicio separados por comas',
+    incluye TEXT COMMENT 'Qué incluye el servicio separado por comas',
     duracion INT NOT NULL COMMENT 'Duración en minutos',
     precio DECIMAL(10, 3) NOT NULL,
     imagen VARCHAR(255),
@@ -210,11 +213,34 @@ CREATE TABLE PAGO (
 -- ============================================
 
 -- Insertar servicios de ejemplo
-INSERT INTO SERVICIO (nombre_servicio, descripcion, duracion, precio, imagen) VALUES
-('Corte Clásico', 'Corte tradicional con tijeras y máquina', 30, 25.000, '/images/corte-clasico.jpg'),
-('Corte + Barba', 'Corte de cabello más arreglo de barba', 45, 35.000, '/images/corte-barba.jpg'),
-('Afeitado Tradicional', 'Afeitado con navaja y toalla caliente', 20, 15.000, '/images/afeitado.jpg'),
-('Tinte', 'Aplicación de tinte profesional', 60, 45.000, '/images/tinte.jpg');
+INSERT INTO SERVICIO (nombre_servicio, descripcion, descripcion_larga, beneficios, incluye, duracion, precio, imagen) VALUES
+('Corte Clásico', 
+ 'Corte tradicional con tijeras y máquina', 
+ 'Un corte de cabello profesional adaptado a tu estilo personal. Nuestros barberos expertos te asesorarán sobre el mejor estilo según la forma de tu rostro y tipo de cabello.',
+ 'Look renovado,Asesoría personalizada,Técnicas profesionales,Acabado perfecto',
+ 'Consulta de estilo,Lavado,Corte con tijeras y/o máquina,Secado y peinado',
+ 30, 25.000, '/images/corte-clasico.jpg'),
+
+('Corte + Barba', 
+ 'Corte de cabello más arreglo de barba', 
+ 'Paquete completo de grooming que incluye corte de cabello y diseño de barba. Ideal para mantener un look impecable y bien cuidado.',
+ 'Look completo,Ahorro de tiempo,Diseño personalizado,Líneas definidas',
+ 'Corte de cabello completo,Diseño y recorte de barba,Perfilado con navaja,Productos de acabado',
+ 45, 35.000, '/images/corte-barba.jpg'),
+
+('Afeitado Tradicional', 
+ 'Afeitado con navaja y toalla caliente', 
+ 'Experiencia de barbería clásica con afeitado a navaja. Incluye preparación con toalla caliente y productos premium para un afeitado suave y sin irritación.',
+ 'Afeitado al ras,Experiencia relajante,Sin irritación,Piel suave',
+ 'Preparación con toalla caliente,Afeitado con navaja,Mascarilla post-afeitado,Bálsamo hidratante',
+ 20, 15.000, '/images/afeitado.jpg'),
+
+('Tinte', 
+ 'Aplicación de tinte profesional', 
+ 'Cambia tu look con nuestro servicio de coloración profesional. Usamos productos de alta calidad que respetan tu cabello mientras logran el color deseado.',
+ 'Color uniforme,Cobertura de canas,Productos premium,Resultado duradero',
+ 'Consulta de color,Aplicación de tinte profesional,Tratamiento acondicionador,Corte y peinado',
+ 60, 45.000, '/images/tinte.jpg');
 
 -- Insertar barberos de ejemplo (contraseña para todos: "barbero123")
 -- Hash bcrypt de "barbero123": $2b$10$7Z1qX3YJ5vN8KxE3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y3QJ5YkuQZ8J5Y
