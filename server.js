@@ -2,7 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3500;
 const session = require('express-session');
 
 // Importar configuración de base de datos y rutas API
@@ -46,6 +46,7 @@ app.get('/services', (req, res) => res.render('services'));
 app.get('/gallery', (req, res) => res.render('gallery'));
 app.get('/booking', (req, res) => res.render('booking'));
 app.get('/contact', (req, res) => res.render('contact'));
+app.get('/admin', (req, res) => res.render('panel'));
 
 // ============================================
 // RUTAS DE API REST
