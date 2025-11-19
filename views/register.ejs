@@ -1,0 +1,36 @@
+<%- include('partials/head', { title: 'Create Account' }) %>
+    <%- include('partials/header') %>
+
+        <main class="container">
+            <section class="form-hero">
+                <h1>Create Account</h1>
+                <p class="form-lead">Join Clip & Fade customer portal</p>
+            </section>
+
+            <% if (error) { %>
+                <div class="error">
+                    <%= error %>
+                </div>
+                <% } %>
+
+                    <form method="post" action="/register" class="auth-form">
+                        <label for="nombre">Full Name</label>
+                        <input id="nombre" name="nombre" type="text" placeholder="Juan Pérez" required />
+
+                        <label for="email">Email Address</label>
+                        <input id="email" name="email" type="email" placeholder="juan@example.com" required />
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="password" placeholder="********" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn gradient">Create Account</button>
+                    </form>
+
+                    <p class="center muted">Already have an account? <a href="/login">Sign in</a></p>
+
+                    <%- include('partials/footer') %>
+        </main>
