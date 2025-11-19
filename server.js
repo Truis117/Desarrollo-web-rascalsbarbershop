@@ -47,6 +47,7 @@ app.get('/gallery', (req, res) => res.render('gallery'));
 app.get('/booking', (req, res) => res.render('booking'));
 app.get('/contact', (req, res) => res.render('contact'));
 app.get('/admin', (req, res) => res.render('panel'));
+
 // ============================================
 // RUTAS DE API REST
 // ============================================
