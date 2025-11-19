@@ -1,60 +1,60 @@
-<%- include('partials/head', { title: "Barber Panel — Clip & Fade" }) %>
+<%- include('partials/head', { title: "Panel de Barbero — Clip & Fade" }) %>
     <%- include('partials/header') %>
 
         <main id="main" class="site-main" role="main">
             <section id="admin" class="admin" aria-labelledby="admin-heading">
                 <div class="container">
-                    <h3 id="admin-heading">🎯 Barber Management Dashboard</h3>
-                    <p class="muted" style="text-align: center; margin-bottom: 2rem;">Professional appointment management system</p>
+                    <h3 id="admin-heading">🎯 Panel de Gestión de Barbería</h3>
+                    <p class="muted" style="text-align: center; margin-bottom: 2rem;">Sistema profesional de gestión de citas</p>
                     
-                    <!-- Statistics -->
+                    <!-- Estadísticas -->
                     <div class="contact-grid">
                         <div class="contact-card">
-                            <h4>📅 Today's Appointments</h4>
+                            <h4>📅 Citas de Hoy</h4>
                             <p class="stat-number" id="today-count">-</p>
-                            <p class="muted">Scheduled</p>
+                            <p class="muted">Agendadas</p>
                         </div>
 
                         <div class="contact-card">
-                            <h4>📊 Weekly Total</h4>
+                            <h4>📊 Total Semanal</h4>
                             <p class="stat-number" id="weekly-count">-</p>
-                            <p class="muted">Appointments</p>
+                            <p class="muted">Citas</p>
                         </div>
 
                         <div class="contact-card">
-                            <h4>⏰ Pending</h4>
+                            <h4>⏰ Pendientes</h4>
                             <p class="stat-number" id="pending-count">-</p>
-                            <p class="muted">Confirmation</p>
+                            <p class="muted">Por Confirmar</p>
                         </div>
 
                         <div class="contact-card">
-                            <h4>💰 Revenue</h4>
+                            <h4>💰 Ingresos</h4>
                             <p class="stat-number" id="revenue-amount">-</p>
-                            <p class="muted">Today's income</p>
+                            <p class="muted">Ingresos de hoy</p>
                         </div>
                     </div>
 
-                    <!-- Appointments Table - TONALIDAD MÁS OSCURA -->
+                    <!-- Tabla de Citas - TONALIDAD MÁS OSCURA -->
                     <div style="margin-top: 3rem;">
-                        <h4 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">📋 Appointments Schedule</h4>
+                        <h4 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">📋 Agenda de Citas</h4>
                         
                         <div style="background: #2c3e50; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow-x: auto;">
                             <table style="width: 100%; border-collapse: collapse; min-width: 800px; font-family: Arial, sans-serif; color: #ecf0f1;">
                                 <thead>
                                     <tr style="background: #34495e;">
-                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">👤 Client</th>
-                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">💈 Barber</th>
-                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">📅 Date</th>
-                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">🕒 Time</th>
-                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">✂️ Service</th>
-                                        <th style="padding: 15px; text-align: center; border: 1px solid #4a6572; font-weight: 600;">📊 Status</th>
-                                        <th style="padding: 15px; text-align: center; border: 1px solid #4a6572; font-weight: 600;">⚡ Actions</th>
+                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">👤 Cliente</th>
+                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">💈 Barbero</th>
+                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">📅 Fecha</th>
+                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">🕒 Hora</th>
+                                        <th style="padding: 15px; text-align: left; border: 1px solid #4a6572; font-weight: 600;">✂️ Servicio</th>
+                                        <th style="padding: 15px; text-align: center; border: 1px solid #4a6572; font-weight: 600;">📊 Estado</th>
+                                        <th style="padding: 15px; text-align: center; border: 1px solid #4a6572; font-weight: 600;">⚡ Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody id="citas-table-body">
                                     <tr>
                                         <td colspan="7" style="padding: 30px; text-align: center; color: #95a5a6;">
-                                            Loading appointments...
+                                            Cargando citas...
                                         </td>
                                     </tr>
                                 </tbody>
@@ -62,10 +62,10 @@
                         </div>
                     </div>
 
-                    <!-- Back to Home -->
+                    <!-- Volver al Inicio -->
                     <div style="text-align: center; margin-top: 2rem;">
                         <a href="/" style="color: #495057; text-decoration: none; font-weight: bold; padding: 10px 20px; border: 1px solid #495057; border-radius: 5px; display: inline-block;">
-                            ← Back to Home
+                            ← Volver al Inicio
                         </a>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         tbody.innerHTML = `
                             <tr>
                                 <td colspan="7" style="padding: 30px; text-align: center; color: #95a5a6;">
-                                    No appointments found
+                                    No se encontraron citas
                                 </td>
                             </tr>
                         `;
@@ -139,16 +139,16 @@
                         let actionButtons = '';
                         if (estado === 'Pendiente') {
                             actionButtons = `
-                                <button onclick="updateStatus(${cita.id_cita}, 'Confirmada')" style="background: #27ae60; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Confirm</button>
-                                <button onclick="updateStatus(${cita.id_cita}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
+                                <button onclick="updateStatus(${cita.id_cita}, 'Confirmada')" style="background: #27ae60; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Confirmar</button>
+                                <button onclick="updateStatus(${cita.id_cita}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancelar</button>
                             `;
                         } else if (estado === 'Confirmada') {
                             actionButtons = `
-                                <button onclick="updateStatus(${cita.id_cita}, 'Completada')" style="background: #f39c12; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Complete</button>
-                                <button onclick="updateStatus(${cita.id_cita}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
+                                <button onclick="updateStatus(${cita.id_cita}, 'Completada')" style="background: #f39c12; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Completar</button>
+                                <button onclick="updateStatus(${cita.id_cita}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancelar</button>
                             `;
                         } else {
-                            actionButtons = `<span style="color: #95a5a6; font-size: 0.8em;">No actions</span>`;
+                            actionButtons = `<span style="color: #95a5a6; font-size: 0.8em;">Sin acciones</span>`;
                         }
 
                         return `
@@ -173,7 +173,7 @@
                     document.getElementById('citas-table-body').innerHTML = `
                         <tr>
                             <td colspan="7" style="padding: 30px; text-align: center; color: #e74c3c;">
-                                Error loading appointments. Please refresh the page.
+                                Error al cargar las citas. Por favor, recarga la página.
                             </td>
                         </tr>
                     `;
@@ -218,11 +218,11 @@
                     const actionsElement = document.getElementById(`actions-${citaId}`);
                     if (newStatus === 'Confirmada') {
                         actionsElement.innerHTML = `
-                            <button onclick="updateStatus(${citaId}, 'Completada')" style="background: #f39c12; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Complete</button>
-                            <button onclick="updateStatus(${citaId}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancel</button>
+                            <button onclick="updateStatus(${citaId}, 'Completada')" style="background: #f39c12; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Completar</button>
+                            <button onclick="updateStatus(${citaId}, 'Cancelada')" style="background: #95a5a6; color: white; border: none; padding: 6px 12px; border-radius: 3px; cursor: pointer; margin: 2px; font-size: 0.8em;">Cancelar</button>
                         `;
                     } else {
-                        actionsElement.innerHTML = `<span style="color: #95a5a6; font-size: 0.8em;">No actions</span>`;
+                        actionsElement.innerHTML = `<span style="color: #95a5a6; font-size: 0.8em;">Sin acciones</span>`;
                     }
 
                     // Recargar estadísticas

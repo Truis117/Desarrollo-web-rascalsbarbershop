@@ -69,7 +69,7 @@ exports.postRegister = async (req, res) => {
         // Basic validation
         if (!nombre || !email || !password) return res.render('register', { error: 'Todos los campos son obligatorios' });
 
-        // Check existing
+        // Check if email exists in Usuario table
         let existing;
         try {
             existing = await Usuario.findOne({ where: { email } });
@@ -81,14 +81,14 @@ exports.postRegister = async (req, res) => {
         }
         if (existing) return res.render('register', { error: 'El email ya está registrado' });
 
+        // Check if email exists in Barbero table
+        const barberoExisting = await Barbero.findOne({ where: { correo: email } });
+        if (barberoExisting) return res.render('register', { error: 'El email ya está registrado' });
+
         // Hash password
         const hash = await bcrypt.hash(password, 10);
 
-        // Create minimal Cliente and Usuario via usuarioController logic path
-        // We'll emulate POST body expected by usuarioController.register
-        const fakeReq = { body: { email, password: hash, rol: 'CLIENTE', nombre, apellido: '', telefono: null, direccion: null } };
-        // usuarioController.register expects raw password for some fields; it currently stores password as-is.
-        // To keep consistent we will create Cliente and Usuario directly here using models.
+        // Create minimal Cliente and Usuario
         let newUsuario;
         try {
             const Cliente = require('../models').Cliente;
